@@ -1,7 +1,7 @@
 .background {
     height: 400px;
     width: 100%;
-    background:url(http://webluxo.com.br/home/wp-content/uploads/2015/09/nova-york-vista-alto-predios-02.jpg);
+    background:url(https://www.pixelstalk.net/wp-content/uploads/2016/10/Blurred-Wallpapers-HD-Free-Download.jpg);
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -13,17 +13,85 @@
     background-size: cover;
 }
 
-.central {
-    height: 100%;
+body{
+    background-color: #F5F5F5;
+}
+
+h1{
+	text-align:center;
+}
+
+.tabela-botao{
+    float: top;
+	position: relative;
+	margin: auto;
+	top: 20%
+}
+
+.firstelement{
+    padding:10px;
+    border-style:solid;
+    border-width:1px;
+    background-color: #FFFFFF;
+    font-family: Arial, Helvetica, sans-serif;
+    border-color:#FFFFFF;
+}
+
+.secondelement{
+    padding:10px;
+    border-style:solid;
+    border-width:1px;
+    font-family: Arial, Helvetica, sans-serif;
+    border-color:#FFFFFF;
+	color: white;
+
+}
+
+
+p.fontesup1{
+    position: relative;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    color: aliceblue;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    top: 60px;
+    font-size: x-large;
+}
+
+p.fontesup2{
+    position: relative;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    color: aliceblue;
+    top: 45px;
+    font-size: medium;
+}
+
+.central1 {
+    height: 300px;
     width: 50%;
     display: block;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
-    border: 1px solid black;
+    /*border: 1px solid black;*/
     position: absolute;
     top: 300px;
     left: 25%;
+    background-color: white;
+}
+
+.central2 {
+    height: 300px;
+    width: 51%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    /*border: 1px solid black;*/
+    position: relative;
+    top: 280px;
+    left: 0%;
     background-color: white;
 }
 
@@ -38,19 +106,19 @@
     background-color: white;
 }
 
+
 .right-menu {
     float: right;
-    display: block;
+    display: inline-block;
     padding: 5px;
     color: antiquewhite;
 }
 
 .left-menu{
-    float: left;
-    display: block;
-    padding: 5px;
+
     color: antiquewhite;
 }
+
 
 .division{
     float: left;
