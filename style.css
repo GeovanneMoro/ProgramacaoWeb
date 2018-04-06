@@ -1,70 +1,9 @@
-.background {
-	height: 400px;
-	width: 100%;
-	background:url(https://www.pixelstalk.net/wp-content/uploads/2016/10/Blurred-Wallpapers-HD-Free-Download.jpg);
-	background-repeat: no-repeat;
-	background-size: cover;
-}
-
-.background2 {
-	height: 200px;
-	width: 100%;
-	background:url(http://webluxo.com.br/home/wp-content/uploads/2015/09/nova-york-vista-alto-predios-02.jpg);
-	background-repeat: no-repeat;
-	background-size: cover;
-}
-
-
 body{
 	background-color: #F5F5F5;
 }
 
 h1{
 	text-align:center;
-}
-
-.icon{
-	display: none;
-}
-
-.tabela-botao{
-	float: top;
-	position: relative;
-	margin: auto;
-	top: 15%;
-	border-spacing: 20px;
-	display:table;
-}
-
-.firstelement{
-	border-radius: 7px;
-	padding:10px;
-	border-style:solid;
-	border-width:1px;
-	background-color: #FFFFFF;
-	font-family: Arial, Helvetica, sans-serif;
-	border-color:#FFFFFF;
-	color:gray;
-	font-weight:bold;
-	width: 130px;
-	text-align: center;
-}
-
-.secondelement{
-	border-radius: 7px;
-	padding:10px;
-	border-style:solid;
-	border-width:1px;
-	font-family: Arial, Helvetica, sans-serif;
-	border-color:#FFFFFF;
-	color: white;
-	font-weight:bold;
-	width: 130px;
-	text-align: center;
-}
-
-.quebra{
-	word-break: break-all;
 }
 
 p.fontesup1{
@@ -84,6 +23,28 @@ p.fontesup2{
 	color: aliceblue;
 	top: 45px;
 	font-size: medium;
+}
+
+.adjust{
+	position: relative;
+	word-break: break-all;	
+	top: 20px;
+}
+
+.background {
+	height: 400px;
+	width: 100%;
+	background:url(https://www.pixelstalk.net/wp-content/uploads/2016/10/Blurred-Wallpapers-HD-Free-Download.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.background2 {
+	height: 200px;
+	width: 100%;
+	background:url(http://webluxo.com.br/home/wp-content/uploads/2015/09/nova-york-vista-alto-predios-02.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 
 .central1 {
@@ -116,38 +77,24 @@ p.fontesup2{
 	background-color: white;
 }
 
-.header {
-	height: 200px;
-	width: 50%;
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	text-align: center;
-	left: 25%;
-	background-color: white;
-}
-
-.overlinep{
-	text-decoration:overline;
-	width:100%;
-}
-
-.right-menu {
-	float: right;
-	display: inline-block;
-	padding: 5px;
-	color: antiquewhite;
-}
-
-.left-menu{
-	color: antiquewhite;
-}
-
-
 .division{
 	float: left;
 	display: block;
 	width: 50%;
+}
+
+.firstelement{
+	border-radius: 7px;
+	padding:10px;
+	border-style:solid;
+	border-width:1px;
+	background-color: #FFFFFF;
+	font-family: Arial, Helvetica, sans-serif;
+	border-color:#FFFFFF;
+	color:gray;
+	font-weight:bold;
+	width: 130px;
+	text-align: center;
 }
 
 .green-button{
@@ -160,6 +107,34 @@ p.fontesup2{
 	background-color: green;
 }
 
+.header {
+	height: 200px;
+	width: 50%;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	left: 25%;
+	background-color: white;
+}
+
+.icon{
+	display: none;
+}
+
+.left-menu{
+	color: antiquewhite;
+}
+
+.overlinep{
+	text-decoration:overline;
+	width:100%;
+}
+
+.quebra{
+	word-break: break-all;
+}
+
 .red-button{
 	position: relative;
 	top: 30px;
@@ -170,10 +145,33 @@ p.fontesup2{
 	background-color: red;
 }
 
-.adjust{
+.right-menu {
+	float: right;
+	display: inline-block;
+	padding: 5px;
+	color: antiquewhite;
+}
+
+.secondelement{
+	border-radius: 7px;
+	padding:10px;
+	border-style:solid;
+	border-width:1px;
+	font-family: Arial, Helvetica, sans-serif;
+	border-color:#FFFFFF;
+	color: white;
+	font-weight:bold;
+	width: 130px;
+	text-align: center;
+}
+
+.tabela-botao{
+	float: top;
 	position: relative;
-	word-break: break-all;	
-	top: 20px;
+	margin: auto;
+	top: 15%;
+	border-spacing: 20px;
+	display:table;
 }
 
 /*TELA CELULAR*/
@@ -186,11 +184,7 @@ p.fontesup2{
 	h1{
 		text-align:center;
 	}
-    
-	.quebra{
-		word-break: break-all;
-	}
-    
+	
 	p.fontesup1{
 		position: relative;
 		text-align: center;
@@ -209,8 +203,24 @@ p.fontesup2{
 		top: 45px;
 		font-size: medium;
 	}
-    
-	.central1 {
+	
+	.background {
+		height: 400px;
+		width: 100%;
+		background:url(https://www.pixelstalk.net/wp-content/uploads/2016/10/Blurred-Wallpapers-HD-Free-Download.jpg);
+		background-repeat: no-repeat;
+		background-size: cover;
+	}
+	
+	.background2 {
+		height: 200px;
+		width: 99%;
+		background:url(http://webluxo.com.br/home/wp-content/uploads/2015/09/nova-york-vista-alto-predios-02.jpg);
+		background-repeat: no-repeat;
+		background-size: cover;
+	}
+	
+       	.central1 {
 		border-radius: 5px;
 		height: 300px;
 		width: 100%;
@@ -237,34 +247,7 @@ p.fontesup2{
 		left: 0%;
 		background-color: white;
 	}
-
-
-	.background {
-		height: 400px;
-		width: 100%;
-		background:url(https://www.pixelstalk.net/wp-content/uploads/2016/10/Blurred-Wallpapers-HD-Free-Download.jpg);
-		background-repeat: no-repeat;
-		background-size: cover;
-	}
 	
-	.background2 {
-		height: 200px;
-		width: 99%;
-		background:url(http://webluxo.com.br/home/wp-content/uploads/2015/09/nova-york-vista-alto-predios-02.jpg);
-		background-repeat: no-repeat;
-		background-size: cover;
-	}
-
-	.tabela-botao{
-		float: top;
-		position: relative;
-		margin: auto;
-		top: 15%;
-		border-spacing: 80px;
-		width:100%;    
-	}
-
-
 	.firstelement{
 		border-radius: 7px;
 		padding:10px;
@@ -279,7 +262,19 @@ p.fontesup2{
 		text-align: center;
 		display:block;
 	}
-
+	
+	.left-menu{
+		 display: none;
+	}
+		
+	.quebra{
+		word-break: break-all;
+	}
+    
+	.right-menu {
+		display: none;
+	}
+	
 	.secondelement{
 		border-radius: 7px;
 		top: 5%;
@@ -293,16 +288,15 @@ p.fontesup2{
 		font-weight:bold;
 		text-align: center;
 		display:block;
-
 	}
 	
-	.left-menu{
-		 display: none;
+	.tabela-botao{
+		float: top;
+		position: relative;
+		margin: auto;
+		top: 15%;
+		border-spacing: 80px;
+		width:100%;    
 	}
-	
-	.right-menu {
-		display: none;
-	}
-
 
 }
