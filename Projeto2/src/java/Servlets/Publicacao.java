@@ -37,7 +37,8 @@ public class Publicacao extends HttpServlet {
             out.println("           <textarea rows = \"30\" cols = \"50\" name = \"description\">");
             out.println("               Escreva o texto aqui...");
             out.println("           </textarea>");
-            out.println("           <input type = \"submit\" name = \"submit\" value = \"Publicar\" />");
+            out.println("           <input type = \"submit\" name = \"submit\" value = \"Publicar\" ");
+            out.println("           onclick = \"submit()\" >");
             out.println("       </form>");
             out.println("   </body>");
             out.println("</html>");
@@ -54,6 +55,7 @@ public class Publicacao extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

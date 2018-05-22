@@ -12,6 +12,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import Database.Database;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
@@ -41,16 +44,20 @@ public class Cadastro extends HttpServlet {
             out.println("   </head>");
             out.println("   <body>");
             out.println("       <h1>Cadastro </h1>");
-            out.println("       <form>");
-            out.println("           Nome: <input type = \"text\" name = nome  >");
+            out.println("       <form method=\"POST\" action = ./Cadastro >");
+            out.println("           Nome: <input type = \"text\" name = firstname  >");
             out.println("           <br>");
-            out.println("           Rua: <input type = \"text\" name = nome  >");
+            out.println("           Sobrenome: <input type = \"text\" name = lastname  >");
             out.println("           <br>");
-            out.println("           Bairro: <input type = \"text\" name = bairro  >");
+            out.println("           Rua: <input type = \"text\" name = street  >");
             out.println("           <br>");
-            out.println("           Cidade: <input type = \"text\" name = cidade  >");
+            out.println("           Cidade: <input type = \"text\" name = city  >");
             out.println("           <br>");
-            out.println("           CEP: <input type = 'text' name = cep  >");
+            out.println("           CEP: <input type = 'text' name = zipcode  >");
+            out.println("           <br>");
+            out.println("           Email: <input type = \"text\" name = email  >");
+            out.println("           <br>");
+            out.println("           Senha: <input type = \"text\" name = password  >");
             out.println("           <br>");
             out.println("           <input type = \"submit\" name = \"submit\" value = \"Cadastrar\" />");
             out.println("       </form>");
@@ -68,6 +75,8 @@ public class Cadastro extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -86,6 +95,11 @@ public class Cadastro extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        Database db = new Database();
+        db.execute("INSERT INTO users (firstname, lastname, street, city, zipcode, email, password) "
+                + "VALUES (?,?,?,?,?,?,?), ", request.getParameter("firstname"), request.getParameter("lastname"), 
+                request.getParameter("street"), request.getParameter("city"), request.getParameter("zipcode"),
+                request.getParameter("email"), request.getParameter("password"));
     }
 
     /**
