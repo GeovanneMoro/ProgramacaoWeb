@@ -6,5 +6,5 @@ public class Configurations {
     public final static String USER = "root";
     public final static String PASS = "rootroot";
     public final static String PORT = "3306";
-    public final static String BASE = "javadb";
+    public final static String BASE = "javabd";
 }
