@@ -79,20 +79,21 @@ public class Index extends HttpServlet {
             out.println("       <div class=\"central1\">");
             out.println("           <div class=\"header\">");
             out.println("               <br><br>");
-            ResultSet rs = db.query("SELECT (title, txt) FROM text");
+    /*            ResultSet rs = db.query("SELECT (post_title, post_text) FROM posts");
             while(rs.next()){
-                out.println("           "+rs.getString("title"));
+                out.println("           "+rs.getString("post_title"));
                 out.println("           <hr>");
-                out.println("           "+rs.getString("txt"));
+                out.println("           "+rs.getString("post_text"));
                 out.println("           <br><br>");
             }                     
+            */
             out.println("           </div>");
             out.println("       </div>");
             out.println("   </body>");
             out.println("</html>");
-        } catch (SQLException ex) {
+        }/* catch (SQLException ex) {
             Logger.getLogger(Index.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
     }
 
     /**

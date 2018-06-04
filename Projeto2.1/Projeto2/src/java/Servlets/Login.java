@@ -88,6 +88,7 @@ public class Login extends HttpServlet {
         
                 
     try (PrintWriter out = response.getWriter()) {
+    
     if(name.equals("igor")){
         request.getSession().setAttribute("login", name);
     out.println("<!DOCTYPE html>");

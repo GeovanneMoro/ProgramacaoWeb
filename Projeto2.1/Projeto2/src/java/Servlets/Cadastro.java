@@ -91,9 +91,16 @@ public class Cadastro extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        
+        Database db = new Database();
+        int ckp = 0;
         String email = request.getParameter("email");
         matcher = pattern.matcher(email);
+        
+        ResultSet rs = db.query("SELECT user_name, user_email FROM users WHERE user_name="+request.getParameter("login")+" OR user_email="+request.getParameter("email"));
+        if(rs==null){
+            ckp=1;
+        }
+              
         
         try (PrintWriter out = response.getWriter()) {
         out.println("<!DOCTYPE html>");
@@ -145,10 +152,14 @@ public class Cadastro extends HttpServlet {
             out.println("               <br><br>");
             out.println("               <a href=\"/Projeto2/Cadastro\">Voltar a pagina de cadastro</a>");
         }
+        else if(ckp == 1){
+            out.println("               Campo nome ou email ja existe, faça outro cadastro!");
+            out.println("               <br><br>");
+            out.println("               <a href=\"/Projeto2/Cadastro\">Voltar a pagina de cadastro</a>");
+        }
         else if(matcher.matches() && !request.getParameter("login").equals("") && !request.getParameter("email").equals("")
         && !request.getParameter("password").equals("")){
-            Database db = new Database();
-            db.execute("INSERT INTO user (login, email, password) "
+            db.execute("INSERT INTO users (user_name, user_email, user_password) "
                 + "VALUES (?,?,?), ", request.getParameter("login"), request.getParameter("email"), 
                 request.getParameter("password"));
             

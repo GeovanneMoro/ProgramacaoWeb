@@ -5,8 +5,11 @@
  */
 package Servlets;
 
+import Database.Database;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -88,29 +91,27 @@ public class Publicacao extends HttpServlet {
         }
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
         String name = (String) request.getSession().getAttribute("login");
-        
-        /*FUNÇÃO PARA ARMAZENAR O TEXTO DO USUÁRIO JUNTO COM O TITULO
-        PROTÓTIPO:
+        int var = 0;
         
         Database db = new Database();
-            db.execute("INSERT INTO text (title, txt) "
-                + "VALUES (?,?), ", request.getParameter("titulo"), request.getParameter("texto"), 
-                request.getParameter("password"));
+        try{
+            ResultSet rs = db.query("SELECT user_id FROM users WHERE user_name = "+name);
+            while(rs.next()){
+                var = rs.getInt("user_id");
+            }
+        }
+        catch(SQLException e){
+            
+        }
+            db.execute("INSERT INTO posts (post_title, post_text, user_id) "
+                + "VALUES (?,?,?)", request.getParameter("titulo"), request.getParameter("texto"), 
+                request.getParameter("password"), var);
         
-        */
         try (PrintWriter out = response.getWriter()) {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
