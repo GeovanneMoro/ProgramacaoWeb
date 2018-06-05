@@ -64,16 +64,18 @@ public class Database {
         return null;
     }
     
-    public void execute(String sql, Object... params){
+    public boolean execute(String sql, Object... params){
         try {
             this.dbPreparedStm = this.dbConnection.prepareStatement(sql);
             int i = 1;
             for (Object o:params)
                 this.dbPreparedStm.setObject(i++, o);
             this.dbPreparedStm.executeUpdate();
+            return true;
         } catch (SQLException ex) {
             System.out.println("Houve um erro ao tentar executar um sql (execução) : " + ex.getMessage());
             System.out.println("[SQL] " + sql);
+            return false;
         }
     }
     

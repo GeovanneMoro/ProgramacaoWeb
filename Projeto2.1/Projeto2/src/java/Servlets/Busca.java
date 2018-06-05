@@ -44,18 +44,17 @@ public class Busca extends HttpServlet {
         processRequest(request, response);
         try (PrintWriter out = response.getWriter()) {
           
-            /*POSSIVEL FUNCAO DE BUSCA
-            ResultSet rs = db.query("SELECT (title, txt) FROM text WHERE title = "+ request.getParameter("title"));
+          //  POSSIVEL FUNCAO DE BUSCA
+            ResultSet rs = db.query("SELECT (post_title, post_text) FROM posts WHERE post_title LIKE "+ request.getParameter("title"));
             while(rs.next()){
-                out.println("           "+rs.getString("title"));
+                out.println("           "+rs.getString("post_title"));
                 out.println("           <hr>");
-                out.println("           "+rs.getString("txt"));
+                out.println("           "+rs.getString("post_text"));
                 out.println("           <br><br>");
             }
         } catch (SQLException ex) {
             Logger.getLogger(Busca.class.getName()).log(Level.SEVERE, null, ex);
-        */
-    }
+        }
     }
 
     /**

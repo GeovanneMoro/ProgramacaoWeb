@@ -1,5 +1,8 @@
 package Servlets;
 
+import Configurations.ConfigurationsMySQL;
+import Database.Database;
+import java.sql.ResultSet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -28,6 +31,7 @@ public class Login extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
     }
+    private final Database db = new Database(new ConfigurationsMySQL());
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -89,47 +93,58 @@ public class Login extends HttpServlet {
                 
     try (PrintWriter out = response.getWriter()) {
     
-    if(!name.equals(null)){
-        request.getSession().setAttribute("login", name);
-    out.println("<!DOCTYPE html>");
-    out.println("<html>");
-    out.println("   <head>");
-    out.println("       <meta charset=\"utf-8\" />");
-    out.println("       <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">");
-    out.println("       <title> - ALPHA - </title>");
-    out.println("       <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">");
-    out.println("       <link rel=\"stylesheet\" type=\"text/css\" media=\"screen\" href=\"style.css\" />");
-    out.println("       <script src=\"main.js\"></script>");
-    out.println("   </head>");
-
-    out.println("   <body>");
-    out.println("       <a href=\"/Projeto2/Cadastro\"> <div style=\"border: 2px solid white; \"class=\"right-menu\">Signup</div> </a>");
-    out.println("       <div class=\"background\">");
-    out.println("           <a href=\"/Projeto2/Publicacao\"> <div class=\"right-menu\">Criar textos</div> </a>");
-    out.println("           <a href=\"/Projeto2/Index\"> <div class=\"right-menu\">Home </div> </a>");
-    out.println("           <div class = \"icon\"></div>");
-    out.println("           <div class=\"left-menu\"><b>Alpha</b> by Pixelarity</div>");
-    out.println("           <p class = \"fontesup1\">Textos diversos</p>");
-    out.println("           <p class = \"fontesup2\">Bem vindo " +name+"!</p>");
-    out.println("           <table class = \"tabela-botao\">");
-    out.println("               <tr>");
-    out.println("                   <td class = \"firstelement\"><a href = \"/Projeto2/Login\"> Logar </a></td>");
-    out.println("                   <td class = \"secondelement\"><a href = \"/Projeto2/Publicacao\"> Criar texto </a></td>");
-    out.println("               </tr>");
-    out.println("           </table>");
-    out.println("       </div>");
-    out.println("       <div class=\"central1\">");
-    out.println("           <div class=\"header\">");
-    out.println("               <h1>Login</h1>");
-    out.println("               <br><br>");
-    out.println("               <p>Usuário logado!<p>");
-    out.println("           </div>");
-    out.println("       </div>");
-    out.println("   </body>");
-    out.println("</html>");
-    }
-    else{
+    if(name == null || password == null){
         response.sendRedirect("Index");
+    }
+   
+    else{
+        ResultSet rs =
+        this.db.query("SELECT user_name,user_password FROM users WHERE "
+        +"user_name='"+name+"' AND user_password='"+password+"'");
+        if(rs != null){
+            request.getSession().setAttribute("login", name);
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("   <head>");
+            out.println("       <meta charset=\"utf-8\" />");
+            out.println("       <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">");
+            out.println("       <title> - ALPHA - </title>");
+            out.println("       <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">");
+            out.println("       <link rel=\"stylesheet\" type=\"text/css\" media=\"screen\" href=\"style.css\" />");
+            out.println("       <script src=\"main.js\"></script>");
+            out.println("   </head>");
+
+            out.println("   <body>");
+            out.println("       <a href=\"/Projeto2/Cadastro\"> <div style=\"border: 2px solid white; \"class=\"right-menu\">Signup</div> </a>");
+            out.println("       <div class=\"background\">");
+            out.println("           <a href=\"/Projeto2/Publicacao\"> <div class=\"right-menu\">Criar textos</div> </a>");
+            out.println("           <a href=\"/Projeto2/Index\"> <div class=\"right-menu\">Home </div> </a>");
+            out.println("           <div class = \"icon\"></div>");
+            out.println("           <div class=\"left-menu\"><b>Alpha</b> by Pixelarity</div>");
+            out.println("           <p class = \"fontesup1\">Textos diversos</p>");
+            out.println("           <p class = \"fontesup2\">Bem vindo " +name+"!</p>");
+            out.println("           <table class = \"tabela-botao\">");
+            out.println("               <tr>");
+            out.println("                   <td class = \"firstelement\"><a href = \"/Projeto2/Login\"> Logar </a></td>");
+            out.println("                   <td class = \"secondelement\"><a href = \"/Projeto2/Publicacao\"> Criar texto </a></td>");
+            out.println("               </tr>");
+            out.println("           </table>");
+            out.println("       </div>");
+            out.println("       <div class=\"central1\">");
+            out.println("           <div class=\"header\">");
+            out.println("               <h1>Login</h1>");
+            out.println("               <br><br>");
+            out.println("               <p>Usuário logado!<p>");
+            out.println("           </div>");
+            out.println("       </div>");
+            out.println("   </body>");
+            out.println("</html>");
+        }
+        else{
+            out.println("Usuário não encontrado!");
+            out.println("<br><br>");
+            out.println("<a href=\"/Projeto2/Login\">Voltar à página de login</a>");
+        }
     }
 }
     }

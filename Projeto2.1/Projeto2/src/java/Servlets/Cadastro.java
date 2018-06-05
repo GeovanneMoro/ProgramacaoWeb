@@ -151,7 +151,7 @@ public class Cadastro extends HttpServlet {
             out.println("               <a href=\"/Projeto2/Cadastro\">Voltar a pagina de cadastro</a>");
         }
         else if(request.getParameter("password").equals("")){
-            out.println("               Campo rua não pode ficar vazio!");
+            out.println("               Campo senha não pode ficar vazio!");
             out.println("               <br><br>");
             out.println("               <a href=\"/Projeto2/Cadastro\">Voltar a pagina de cadastro</a>");
         }
@@ -160,15 +160,23 @@ public class Cadastro extends HttpServlet {
             out.println("               <br><br>");
             out.println("               <a href=\"/Projeto2/Cadastro\">Voltar a pagina de cadastro</a>");
         }*/
-        else if(matcher.matches() && !request.getParameter("login").equals("") && !request.getParameter("email").equals("")
-        && !request.getParameter("password").equals("")){
-            db.execute("INSERT INTO users (user_name, user_email, user_password) "
-                + "VALUES (?,?,?)", request.getParameter("login"), request.getParameter("email"), 
-                request.getParameter("password"));
+        else if(matcher.matches()){
+               boolean ok = 
+               db.execute("INSERT INTO users (user_name, user_email, user_password) "
+                    + "VALUES (?,?,?)",request.getParameter("login"), email, 
+                    request.getParameter("password"));
+            if(ok){
+                out.println("               Cadastro realizado com sucesso!");
+                out.println("               <br><br>");
+                out.println("               <a href=\"/Projeto2/Login\">Realizar Login</a>");
+            }
+            else{
+                out.println("               Falha ao fazer conexão com o banco de dados!");
+                out.println("               <br><br>");
+                out.println("               <a href=\"/Projeto2/Cadastro\">Tentar novamente</a>");
+            }
             
-            out.println("               Cadastro realizado com sucesso!");
-            out.println("               <br><br>");
-            out.println("               <a href=\"/Projeto2/Login\">Realizar Login</a>");
+  
         }
         out.println("           </div>");
         out.println("       </div>");
