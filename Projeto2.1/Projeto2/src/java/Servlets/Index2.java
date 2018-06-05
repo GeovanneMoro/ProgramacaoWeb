@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author igorv
  */
 @WebServlet(name = "Index", urlPatterns = {"/Index"})
-public class Index extends HttpServlet {
+public class Index2 extends HttpServlet {
     private final Database db = new Database(new ConfigurationsMySQL());
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -50,6 +50,7 @@ public class Index extends HttpServlet {
             out.println("       <div class=\"background\">");
             out.println("           <a href=\"/Projeto2/Publicacao\"> <div class=\"right-menu\">Criar textos</div> </a>");
             out.println("           <a href=\"/Projeto2/Index\"> <div class=\"right-menu\">Home </div> </a>");
+            out.println("           <a href=\"/Projeto2/Busca\"> <div class=\"right-menu\">Buscar </div> </a>");
             out.println("           <div class = \"icon\"></div>");
             out.println("           <div class=\"left-menu\"><b>Alpha</b> by Pixelarity</div>");
             if (name != null) {
@@ -70,19 +71,23 @@ public class Index extends HttpServlet {
             out.println("       <div class=\"central1\">");
             out.println("           <div class=\"header\">");
             out.println("               <br><br>");
-    /*            ResultSet rs = db.query("SELECT (post_title, post_text) FROM posts");
+             ResultSet rs = db.query("SELECT post_title, post_text FROM posts");
             while(rs.next()){
-                out.println("           "+rs.getString("post_title"));
-                out.println("           <hr>");
+                out.println("           <h3>"+rs.getString("post_title")+"</h3>");
                 out.println("           "+rs.getString("post_text"));
                 out.println("           <br><br>");
-            }                     
-            */
+                out.println("           <hr>");
+                out.println("           <br><br>");
+                
+            }                                 
             out.println("           </div>");
             out.println("       </div>");
             out.println("   </body>");
             out.println("</html>");
+        } catch (SQLException ex) {
+            Logger.getLogger(Index2.class.getName()).log(Level.SEVERE, null, ex);
         }/* catch (SQLException ex) {
+            Logger.getLogger(Index.class.getName()).log(Level.SEVERE, null, ex);/* catch (SQLException ex) {
             Logger.getLogger(Index.class.getName()).log(Level.SEVERE, null, ex);
         }*/
     }

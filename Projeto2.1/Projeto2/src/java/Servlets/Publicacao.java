@@ -80,7 +80,7 @@ public class Publicacao extends HttpServlet {
                 out.println("                   Titulo<br>");
                 out.println("                   <input type = \"text\" size = \"40\" name = title>");
                 out.println("                   <br><br> ");
-                out.println("                   <textarea rows = \"25\" cols = \"50\" name = \"text\">");
+                out.println("                   <textarea rows = \"25\" cols = \"50\" name = text>");
                 out.println("                       Escreva o texto aqui...");
                 out.println("                   </textarea>");
                 out.println("                   <br>");
@@ -103,9 +103,8 @@ public class Publicacao extends HttpServlet {
         String name = (String) request.getSession().getAttribute("login");
         int var = 0;
         ResultSet rs;
-        rs = db.query("SELECT user_name FROM users WHERE user_name = "+name);
         try{
-            rs = db.query("SELECT user_id FROM users WHERE user_name = "+name);
+            rs = db.query("SELECT * FROM users WHERE user_name = '"+name+"'");
             while(rs.next()){
                 var = rs.getInt("user_id");
             }
@@ -113,12 +112,11 @@ public class Publicacao extends HttpServlet {
         catch(SQLException e){
             
         }
-        if(rs == null){
+        if(var == 0){
                 response.sendRedirect("Login");
-            }
-            db.execute("INSERT INTO posts (post_title, post_text, user_id) "
-                + "VALUES (?,?,?)", request.getParameter("titulo"), request.getParameter("texto"), 
-                request.getParameter("password"), var);
+        }
+        db.execute("INSERT INTO posts (post_title, post_text, user_id) "
+            + "VALUES (?,?,?)", request.getParameter("title"), request.getParameter("text"), var);
         
         try (PrintWriter out = response.getWriter()) {
             out.println("<!DOCTYPE html>");

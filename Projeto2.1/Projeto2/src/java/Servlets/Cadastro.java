@@ -58,7 +58,7 @@ public class Cadastro extends HttpServlet {
         out.println("       <a href=\"/Projeto2/Cadastro\"> <div style=\"border: 2px solid white; \"class=\"right-menu\">Signup</div> </a>");
         out.println("       <div class=\"background\">");
         out.println("           <a href=\"/Projeto2/Publicacao\"> <div class=\"right-menu\">Criar textos</div> </a>");
-        out.println("           <a href=\"/Projeto2/Index\"> <div class=\"right-menu\">Home </div> </a>");
+        out.println("           <a href=\"/Projeto2/Index2\"> <div class=\"right-menu\">Home </div> </a>");
         out.println("           <div class = \"icon\"></div>");
         out.println("           <div class=\"left-menu\"><b>Alpha</b> by Pixelarity</div>");
         out.println("           <p class = \"fontesup1\">Textos diversos</p>");

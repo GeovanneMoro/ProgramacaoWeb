@@ -5,6 +5,9 @@ import Database.Database;
 import java.sql.ResultSet;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -70,9 +73,9 @@ public class Login extends HttpServlet {
         out.println("               <br><br>");
         out.println("               <form action = \"/Projeto2/Login\" method = \"POST\"> <br>");
         out.println("               Usuario <br>");
-        out.println("               <input type = \"text\" name = \"login\" value = \"\"> <br>");
+        out.println("               <input type = \"text\" name = login value = \"\"> <br>");
         out.println("               Senha <br>");
-        out.println("               <input type = \"text\" name = \"password\" value = \"\"><br><br>");
+        out.println("               <input type = \"text\" name = password value = \"\"><br><br>");
         out.println("               <input type = \"submit\" value = \"Entrar\"><br><br>");
         out.println("               <a href = \"/Projeto2/Cadastro\">Ainda não possui conta? Cadastre-se clicando aqui! </a>");
         out.println("           </div>");
@@ -93,17 +96,17 @@ public class Login extends HttpServlet {
                 
     try (PrintWriter out = response.getWriter()) {
     
-    if(name == null || password == null){
+    if(name.equals("")|| password.equals("")){
         response.sendRedirect("Index");
     }
    
     else{
-        ResultSet rs =
-        this.db.query("SELECT user_name,user_password FROM users WHERE "
+        ResultSet rs = null;
+        System.out.println("~~~~~~~~~~ TEXTO 1: "+rs);
+        rs = this.db.query("SELECT user_name,user_password FROM users WHERE "
         +"user_name='"+name+"' AND user_password='"+password+"'");
-        if(rs != null){
-            request.getSession().setAttribute("login", name);
-            out.println("<!DOCTYPE html>");
+        System.out.println("~~~~~~~~~~ TEXTO1.5: "+rs);
+        out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("   <head>");
             out.println("       <meta charset=\"utf-8\" />");
@@ -132,21 +135,25 @@ public class Login extends HttpServlet {
             out.println("       </div>");
             out.println("       <div class=\"central1\">");
             out.println("           <div class=\"header\">");
+        if(rs.isBeforeFirst()!=false){
+            request.getSession().setAttribute("login", name);
             out.println("               <h1>Login</h1>");
             out.println("               <br><br>");
             out.println("               <p>Usuário logado!<p>");
-            out.println("           </div>");
-            out.println("       </div>");
-            out.println("   </body>");
-            out.println("</html>");
         }
         else{
             out.println("Usuário não encontrado!");
             out.println("<br><br>");
             out.println("<a href=\"/Projeto2/Login\">Voltar à página de login</a>");
         }
+            out.println("           </div>");
+            out.println("       </div>");
+            out.println("   </body>");
+            out.println("</html>");
     }
-}
+}       catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     @Override
     public String getServletInfo() {

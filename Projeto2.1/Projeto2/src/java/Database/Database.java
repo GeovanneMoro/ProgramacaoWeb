@@ -28,7 +28,7 @@ public class Database {
     }
     
     private String generateConnectionString(){
-        return "jdbc:" + this.dbType + "://" + this.dbHost + ":" + this.dbPort + "/" + this.dbBase + "?useUnicode=true&characterEncoding=utf-8";
+        return "jdbc:" + this.dbType + "://" + this.dbHost + ":" + this.dbPort + "/" + this.dbBase + "?useSSL=false";
     }
     
     public void connect(Configurations config){

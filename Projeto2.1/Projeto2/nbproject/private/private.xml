@@ -2,6 +2,13 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/igorv/Desktop/web/ProgramacaoWeb/Projeto2.1/Projeto2/src/java/Database/Database.java</file>
+            <file>file:/C:/Users/igorv/Desktop/web/ProgramacaoWeb/Projeto2.1/Projeto2/src/java/Configurations/ConfigurationsMySQL.java</file>
+            <file>file:/C:/Users/igorv/Desktop/web/ProgramacaoWeb/Projeto2.1/Projeto2/src/java/Servlets/Busca.java</file>
+            <file>file:/C:/Users/igorv/Desktop/web/ProgramacaoWeb/Projeto2.1/Projeto2/src/java/Configurations/Configurations.java</file>
+            <file>file:/C:/Users/igorv/Desktop/web/ProgramacaoWeb/Projeto2.1/Projeto2/src/java/Servlets/Cadastro.java</file>
+            <file>file:/C:/Users/igorv/Desktop/web/ProgramacaoWeb/Projeto2.1/Projeto2/src/java/Servlets/Index.java</file>
+        </group>
     </open-files>
 </project-private>
