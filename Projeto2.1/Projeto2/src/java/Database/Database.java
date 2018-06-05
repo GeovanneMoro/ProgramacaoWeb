@@ -15,6 +15,7 @@ public class Database {
     private String dbPass;
     private String dbPort;
     private String dbBase;
+    private String dbDriv;
     
     private String connString;
     
@@ -22,21 +23,21 @@ public class Database {
     private Statement         dbStatement;
     private PreparedStatement dbPreparedStm;
     
-    public Database(){
-        this.connect();
+    public Database(Configurations config){
+        this.connect(config);
     }
     
     private String generateConnectionString(){
         return "jdbc:" + this.dbType + "://" + this.dbHost + ":" + this.dbPort + "/" + this.dbBase + "?useUnicode=true&characterEncoding=utf-8";
     }
     
-    public void connect(){
-        this.dbType = Configurations.TYPE;
-        this.dbHost = Configurations.HOST;
-        this.dbUser = Configurations.USER;
-        this.dbPass = Configurations.PASS;
-        this.dbPort = Configurations.PORT;
-        this.dbBase = Configurations.BASE;
+    public void connect(Configurations config){
+        this.dbType = config.TYPE;
+        this.dbHost = config.HOST;
+        this.dbUser = config.USER;
+        this.dbPass = config.PASS;
+        this.dbPort = config.PORT;
+        this.dbBase = config.BASE;
         
         this.connString = this.generateConnectionString();
         

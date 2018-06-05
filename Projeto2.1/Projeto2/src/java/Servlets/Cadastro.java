@@ -5,6 +5,8 @@
  */
 package Servlets;
 
+import Configurations.Configurations;
+import Configurations.ConfigurationsMySQL;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -28,6 +30,7 @@ public class Cadastro extends HttpServlet {
 		+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
     private Pattern pattern = Pattern.compile(emailPattern);
     private Matcher matcher;
+    private final Database db = new Database(new ConfigurationsMySQL());
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -91,16 +94,16 @@ public class Cadastro extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        Database db = new Database();
-        int ckp = 0;
+//        int ckp = 0;
         String email = request.getParameter("email");
         matcher = pattern.matcher(email);
         
+        /*
         ResultSet rs = db.query("SELECT user_name, user_email FROM users WHERE user_name="+request.getParameter("login")+" OR user_email="+request.getParameter("email"));
         if(rs==null){
             ckp=1;
         }
-              
+        */            
         
         try (PrintWriter out = response.getWriter()) {
         out.println("<!DOCTYPE html>");
@@ -125,7 +128,7 @@ public class Cadastro extends HttpServlet {
             out.println("           <table class = \"tabela-botao\">");
             out.println("               <tr>");
             out.println("                   <td class = \"firstelement\"><a href = \"/Projeto2/Login\"> Logar </a></td>");
-            out.println("                   <td class = \"secondelement\"><a href = \"/Projeto2/indexPublicacao.html\"> Criar texto </a></td>");
+            out.println("                   <td class = \"secondelement\"><a href = \"/Projeto2/Publicacao\"> Criar texto </a></td>");
             out.println("               </tr>");
             out.println("           </table>");
             out.println("       </div>");
@@ -140,7 +143,7 @@ public class Cadastro extends HttpServlet {
         else if(request.getParameter("login").equals("")){
         out.println("                   Campo nome não pode ficar vazio!");
         out.println("                   <br><br>");
-        out.println("                   <a href=\"/Projeto2/indexCadastro.html\">Voltar a pagina de cadastro</a>");
+        out.println("                   <a href=\"/Projeto2/Cadastro\">Voltar a pagina de cadastro</a>");
         }
         else if(request.getParameter("email").equals("")){
             out.println("               Campo sobrenome não pode ficar vazio!");
@@ -152,15 +155,15 @@ public class Cadastro extends HttpServlet {
             out.println("               <br><br>");
             out.println("               <a href=\"/Projeto2/Cadastro\">Voltar a pagina de cadastro</a>");
         }
-        else if(ckp == 1){
+  /*      else if(ckp == 0){
             out.println("               Campo nome ou email ja existe, faça outro cadastro!");
             out.println("               <br><br>");
             out.println("               <a href=\"/Projeto2/Cadastro\">Voltar a pagina de cadastro</a>");
-        }
+        }*/
         else if(matcher.matches() && !request.getParameter("login").equals("") && !request.getParameter("email").equals("")
         && !request.getParameter("password").equals("")){
             db.execute("INSERT INTO users (user_name, user_email, user_password) "
-                + "VALUES (?,?,?), ", request.getParameter("login"), request.getParameter("email"), 
+                + "VALUES (?,?,?)", request.getParameter("login"), request.getParameter("email"), 
                 request.getParameter("password"));
             
             out.println("               Cadastro realizado com sucesso!");

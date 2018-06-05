@@ -70,7 +70,7 @@ public class Login extends HttpServlet {
         out.println("               Senha <br>");
         out.println("               <input type = \"text\" name = \"password\" value = \"\"><br><br>");
         out.println("               <input type = \"submit\" value = \"Entrar\"><br><br>");
-        out.println("               <a href = \"/Projeto2/indexCadastro.html\">Ainda não possui conta? Cadastre-se clicando aqui! </a>");
+        out.println("               <a href = \"/Projeto2/Cadastro\">Ainda não possui conta? Cadastre-se clicando aqui! </a>");
         out.println("           </div>");
         out.println("       </div>");
         out.println("   </body>");
@@ -89,7 +89,7 @@ public class Login extends HttpServlet {
                 
     try (PrintWriter out = response.getWriter()) {
     
-    if(name.equals("igor")){
+    if(!name.equals(null)){
         request.getSession().setAttribute("login", name);
     out.println("<!DOCTYPE html>");
     out.println("<html>");

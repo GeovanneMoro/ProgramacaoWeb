@@ -1,6 +1,7 @@
 
 package Servlets;
 
+import Configurations.ConfigurationsMySQL;
 import Database.Database;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -20,25 +21,15 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "Index", urlPatterns = {"/Index"})
 public class Index extends HttpServlet {
-
+    private final Database db = new Database(new ConfigurationsMySQL());
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Database db = new Database();
         processRequest(request, response);
         String name = (String) request.getSession().getAttribute("login");
         response.setContentType("text/html;charset=UTF-8");
@@ -55,10 +46,10 @@ public class Index extends HttpServlet {
             out.println("   </head>");
 
             out.println("   <body>");
-            out.println("       <a href=\"/Projeto2/indexCadastro.html\"> <div style=\"border: 2px solid white; \"class=\"right-menu\">Signup</div> </a>");
+            out.println("       <a href=\"/Projeto2/Cadastro\"> <div style=\"border: 2px solid white; \"class=\"right-menu\">Signup</div> </a>");
             out.println("       <div class=\"background\">");
-            out.println("           <a href=\"/Projeto2/indexPublicacao.html\"> <div class=\"right-menu\">Criar textos</div> </a>");
-            out.println("           <a href=\"/Projeto2/index.html\"> <div class=\"right-menu\">Home </div> </a>");
+            out.println("           <a href=\"/Projeto2/Publicacao\"> <div class=\"right-menu\">Criar textos</div> </a>");
+            out.println("           <a href=\"/Projeto2/Index\"> <div class=\"right-menu\">Home </div> </a>");
             out.println("           <div class = \"icon\"></div>");
             out.println("           <div class=\"left-menu\"><b>Alpha</b> by Pixelarity</div>");
             if (name != null) {
@@ -72,7 +63,7 @@ public class Index extends HttpServlet {
             out.println("           <table class = \"tabela-botao\">");
             out.println("               <tr>");
             out.println("                   <td class = \"firstelement\"><a href = \"/Projeto2/Login\"> Logar </a></td>");
-            out.println("                   <td class = \"secondelement\"><a href = \"/Projeto2/indexPublicacao.html\"> Criar texto </a></td>");
+            out.println("                   <td class = \"secondelement\"><a href = \"/Projeto2/Publicacao\"> Criar texto </a></td>");
             out.println("               </tr>");
             out.println("           </table>");
             out.println("       </div>");
