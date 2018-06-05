@@ -31,7 +31,6 @@ public class Publicacao extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
         String name = (String) request.getSession().getAttribute("login");
-        String rs;
         try (PrintWriter out = response.getWriter()) {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
@@ -67,14 +66,13 @@ public class Publicacao extends HttpServlet {
             out.println("       </div>");
             out.println("       <div class=\"central1\">");
             out.println("           <div class=\"header\">");
-            rs = name;
-            if(rs == null){
+            if(name == null){
                 out.println("Sessao reservada para usuarios logados");
                 out.println("       </div>");
                 out.println("   </body>");
                 out.println("</html>");         
             }
-            else{
+            else /*if ()*/{
                 out.println("               <h1>Publicação</h1>");
                 out.println("               <form method = \"POST\" action = \"/Projeto2/Publicacao\">");
                 out.println("                   Titulo<br>");
