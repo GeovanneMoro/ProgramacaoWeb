@@ -15,6 +15,7 @@ public class Database {
     private String dbPass;
     private String dbPort;
     private String dbBase;
+    private String dbDriv;
     
     private String connString;
     
@@ -22,21 +23,21 @@ public class Database {
     private Statement         dbStatement;
     private PreparedStatement dbPreparedStm;
     
-    public Database(){
-        this.connect();
+    public Database(Configurations config){
+        this.connect(config);
     }
     
     private String generateConnectionString(){
-        return "jdbc:" + this.dbType + "://" + this.dbHost + ":" + this.dbPort + "/" + this.dbBase + "?useUnicode=true&characterEncoding=utf-8";
+        return "jdbc:" + this.dbType + "://" + this.dbHost + ":" + this.dbPort + "/" + this.dbBase + "?useSSL=false";
     }
     
-    public void connect(){
-        this.dbType = Configurations.TYPE;
-        this.dbHost = Configurations.HOST;
-        this.dbUser = Configurations.USER;
-        this.dbPass = Configurations.PASS;
-        this.dbPort = Configurations.PORT;
-        this.dbBase = Configurations.BASE;
+    public void connect(Configurations config){
+        this.dbType = config.TYPE;
+        this.dbHost = config.HOST;
+        this.dbUser = config.USER;
+        this.dbPass = config.PASS;
+        this.dbPort = config.PORT;
+        this.dbBase = config.BASE;
         
         this.connString = this.generateConnectionString();
         
@@ -63,16 +64,18 @@ public class Database {
         return null;
     }
     
-    public void execute(String sql, Object... params){
+    public boolean execute(String sql, Object... params){
         try {
             this.dbPreparedStm = this.dbConnection.prepareStatement(sql);
             int i = 1;
             for (Object o:params)
                 this.dbPreparedStm.setObject(i++, o);
             this.dbPreparedStm.executeUpdate();
+            return true;
         } catch (SQLException ex) {
             System.out.println("Houve um erro ao tentar executar um sql (execução) : " + ex.getMessage());
             System.out.println("[SQL] " + sql);
+            return false;
         }
     }
     

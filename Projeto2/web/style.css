@@ -47,9 +47,13 @@ p.fontesup2{
 	background-size: cover;
 }
 
+.button{
+    display: inline-block;    
+}
+
 .central1 {
 	border-radius: 5px;
-	height: 300px;
+	height: 600px;
 	width: 50%;
 	display: block;
 	margin-left: auto;
@@ -220,7 +224,7 @@ p.fontesup2{
 	
        	.central1 {
 		border-radius: 5px;
-		height: 300px;
+		height: 100%;
 		width: 100%;
 		display: block;
 		text-align: center;
