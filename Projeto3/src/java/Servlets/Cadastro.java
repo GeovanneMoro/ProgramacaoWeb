@@ -112,16 +112,14 @@ public class Cadastro extends HttpServlet {
                     + "VALUES (?,?,?)",request.getParameter("login"), email, 
                     request.getParameter("password")); //verifica se retorna algo do bd
             if(ok){
+                response.setStatus(200);
                 //cadastro realizado com sucesso
             }
             else{
+                response.setStatus(500);
                 //retornar erro na conexão com o banco de dados
             } 
         }
-        out.println("           </div>");
-        out.println("       </div>");
-        out.println("   </body>");
-        out.println("</html>");
         }    
     }
 
