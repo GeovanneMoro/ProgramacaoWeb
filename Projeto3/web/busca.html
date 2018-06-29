@@ -53,8 +53,9 @@
                   }
                }
             }            
-            xmlhttp.open("GET", "Projeto3/Busca?post_title=sapo", true);
-               // xmlhttp.open("GET", "cidade?nome=" + this.value, true);
+            //xmlhttp.open("GET", "Projeto3/Busca?post_title=sapo", true);
+            //colocar valor certo pra mandar junto com o get
+			xmlhttp.open("GET", "cidade?nome=" + this.value, true);
 
             xmlhttp.onreadystatechange = function() {
             
