@@ -29,21 +29,74 @@
             <div class="header">
 			
 			<h1>Cadastro de usuário</h1><br><br>
-			<form method="POST" action = "/Projeto2/Cadastro" >
 			Email <br>
-			<input type = "text" size = "40" name = email><br>
+			<input type = "text" id = "email"  size = "40" name = email><br>
 			Nome do usuario <br>
-			<input type = "text" size = "40" name = login  >
+			<input type = "text" id = "name"  size = "40" name = login  >
                         <br>
                         Endereço <br>
-			<input type = "text" size = "40" name = address  >
+			<input type = "text" id = "address" size = "40" name = address  >
 			<br>
 			Senha <br>
-			<input type = "text" size = "40" name = password  >                        
+			<input type = "text" id = "password" size = "40" name = password  >                        
 			<br><br>
-			<input type = "submit" name = "submit" value = "Cadastrar" />
-            <br><br>
-			
+			<input type = "button" onClick ="funcaoCadastro()" value = "Cadastrar" />
+                        <br><br>
+                        <div id = "textoDiv">Texto:</div>
+			<script language = "javascript" type = "text/javascript">
+
+            function funcaoCadastro() {
+            var xmlhttp;  // The variable that makes Ajax possible!
+            console.log("Entrou na busca");
+            try {        
+               // Opera 8.0+, Firefox, Safari
+               xmlhttp = new XMLHttpRequest();
+            } catch (e) {
+               try {
+                  xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
+               } catch (e) {
+                  try {
+                     xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                  } catch (e) {
+                     // Something went wrong
+                     alert("Erro no browser!");
+                     return false;
+                  }
+               }
+            }      
+            var nome = document.getElementById('name').value;
+            var endereco = document.getElementById('address').value;
+            var email = document.getElementById('email').value;
+            var senha = document.getElementById('password').value;
+                        
+            console.log("Nome: "+nome);
+            console.log("Endereco: "+endereco);
+            console.log("Email: "+email);
+            console.log("Senha: "+senha);
+            
+            //xmlhttp.open("GET", "Projeto3/Busca?post_title=sapo", true);
+            //colocar valor certo pra mandar junto com o get
+            document.getElementById('textoDiv').innerHTML = "Carregando..";
+            xmlhttp.open("POST", "/Projeto3/Cadastro", true);
+            xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                        xmlhttp.onreadystatechange = function() {
+               if(xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    document.getElementById('textoDiv').innerHTML = xmlhttp.responseText;
+               }
+            }
+            //let obj = {nome: nome, email:email, endereco: endereco, senha:senha}
+            xmlhttp.send("nome="+nome+"&email="+email+"&endereco="+endereco+"&senha="+senha); 
+            // Now get the value from user and pass it to
+            //xmlhttp.send({data: JSON.stringify(obj)}); 
+
+            // server script.
+            /*var titulo = document.getElementById('post_title').value;
+            var texto = document.getElementById('post_text').value;
+            var queryString = "?post_title = " + title ;
+            
+            queryString +=  "&post_text = " + texto;*/
+         }         
+        </script>    
             </div>
             </div>
             </body>

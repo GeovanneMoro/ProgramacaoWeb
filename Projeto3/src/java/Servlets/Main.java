@@ -39,10 +39,10 @@ public class Main extends HttpServlet {
 
             out.println("   <body>");
             out.println("       <div class=\"background\">");
-            out.println("          <a href=\"/Projeto2/Cadastro\"> <div <div class=\"right-menu\">Cadastrar</div> </a>");
-            out.println("           <a href=\"/Projeto2/Publicacao\"> <div class=\"right-menu\">Publicar textos</div> </a>");
-            out.println("           <a href=\"/Projeto2/Busca\"> <div class=\"right-menu\">Buscar </div> </a>");
-            out.println("           <a href=\"/Projeto2/Main\"> <div class=\"right-menu\">Home </div> </a>");
+            out.println("          <a href=\"cadastro.html\"> <div <div class=\"right-menu\">Cadastrar</div> </a>");
+            out.println("           <a href=\"publicacao.html\"> <div class=\"right-menu\">Publicar textos</div> </a>");
+            out.println("           <a href=\"busca.html\"> <div class=\"right-menu\">Buscar </div> </a>");
+            out.println("           <a href=\"index.html\"> <div class=\"right-menu\">Home </div> </a>");
             out.println("           <div class = \"icon\"></div>");
             out.println("           <div class=\"left-menu\"><b>Alpha</b> by Pixelarity</div>");
             out.println("       <p class = \"fontesup1\">Textos diversos</p>");
@@ -51,8 +51,8 @@ public class Main extends HttpServlet {
             }
             out.println("           <table class = \"tabela-botao\">");
             out.println("               <tr>");
-            out.println("                   <td class = \"firstelement\"><a href = \"/Projeto2/Login\"> Logar </a></td>");
-            out.println("                   <td class = \"secondelement\"><a href = \"/Projeto2/Publicacao\"> Criar texto </a></td>");
+            out.println("                   <td class = \"firstelement\"><a href = \"login.html\"> Logar </a></td>");
+            out.println("                   <td class = \"secondelement\"><a href = \"publicacao.html\"> Criar texto </a></td>");
             out.println("               </tr>");
             out.println("           </table>");
             out.println("       </div>");

@@ -27,15 +27,68 @@
             </div>
             <div class="central1">
             <div class="header">
-					<h1>Login</h1>
-				<br><br>	
-				<form action = "/Projeto2/Login" method = "POST"> <br>
-				Usuario <br>
-				<input type = "text" name = login value = ""> <br>
-				Senha <br>
-				<input type = "text" name = password value = ""><br><br>
-				<input type = "submit" value = "Entrar"><br><br>
-			<a href = /Projeto2/Cadastro">Ainda não possui conta? Cadastre-se clicando aqui! </a>
+            <h1>Login</h1>
+            <br><br>	
+            Usuario <br>
+            <input type = "text" id = "name" name = login value = ""> <br>
+            Senha <br>
+            <input type = "text" id = "password" name = password value = ""><br><br>
+            <input type = "button" onClick ="funcaoLogin()" value = "Entrar"><br><br>
+            <div id = 'textoDiv'>Texto:</div>
+
+
+            <script language = "javascript" type = "text/javascript">
+
+            function funcaoLogin() {
+            var xmlhttp;  // The variable that makes Ajax possible!
+            console.log("Entrou na busca");
+            try {        
+               // Opera 8.0+, Firefox, Safari
+               xmlhttp = new XMLHttpRequest();
+            } catch (e) {
+               try {
+                  xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
+               } catch (e) {
+                  try {
+                     xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                  } catch (e) {
+                     // Something went wrong
+                     alert("Erro no browser!");
+                     return false;
+                  }
+               }
+            }      
+            var login = document.getElementById('name').value;
+            var password = document.getElementById('password').value;
+
+            console.log("Nome: "+login);
+            console.log("Senha: "+password);
+            
+            //xmlhttp.open("GET", "Projeto3/Busca?post_title=sapo", true);
+            //colocar valor certo pra mandar junto com o get
+            document.getElementById('textoDiv').innerHTML = "Carregando..";
+            xmlhttp.open("POST", "Login", true);
+            xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                        xmlhttp.onreadystatechange = function() {
+               if(xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    document.getElementById('textoDiv').innerHTML = xmlhttp.responseText;
+               }
+            }
+            //let obj = {nome: nome, email:email, endereco: endereco, senha:senha}
+            xmlhttp.send("login="+login+"&password="+password); 
+            // Now get the value from user and pass it to
+            //xmlhttp.send({data: JSON.stringify(obj)}); 
+
+            // server script.
+            /*var titulo = document.getElementById('post_title').value;
+            var texto = document.getElementById('post_text').value;
+            var queryString = "?post_title = " + title ;
+            
+            queryString +=  "&post_text = " + texto;*/
+         }         
+        </script>    
+                                
+			<a href = "/Projeto2/Cadastro">Ainda não possui conta? Cadastre-se clicando aqui! </a>
             <br><br>
             </div>
             </div>

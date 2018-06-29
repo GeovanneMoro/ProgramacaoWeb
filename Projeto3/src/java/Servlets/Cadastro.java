@@ -55,8 +55,13 @@ public class Cadastro extends HttpServlet {
         int ckpUser = 0;
         int ckpEmail = 0;
         String email = request.getParameter("email");
-        String username = request.getParameter("login");
-        String password = request.getParameter("password");
+        String username = request.getParameter("nome");
+        String password = request.getParameter("senha");
+        String address = request.getParameter("endereco");
+        System.out.println("Email: "+email);
+        System.out.println("Usuario: "+username);
+        System.out.println("Endereco: "+address);
+        System.out.println("Password: "+password);
         umatcher = upattern.matcher(username);
         pmatcher = ppattern.matcher(password);
         matcher = pattern.matcher(email);
@@ -83,40 +88,69 @@ public class Cadastro extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {         
         //verifica se todos os campos estão preenchidos corretamente para escrever no banco de dados
         if(!matcher.matches()){
-            //erro email nao obedece os requisitos
+            out.println("               <br><br>");
+            out.println("               Email invalido!");
+            out.println("               <br><br>");
+            out.println("               <a href=\"cadastro.html\">Voltar a pagina de cadastro</a>");
         }
         else if(!umatcher.matches()){
-            //erro nome nao obedece os requisitos
+            out.println("               <br><br>");
+            out.println("               Nome de usuario invalido! O nome deve ter no minimo 3 letras e no maximo 15, apenas os caracteres especiais '-' e '_' sao permitidos");
+            out.println("               <br><br>");
+            out.println("               <a href=\"cadastro.html\">Voltar a pagina de cadastro</a>");
         }
         else if(!pmatcher.matches()){
-            //erro senha nao obedece os requisitos
+            out.println("               <br><br>");
+            out.println("               Senha invalida! A senha deve conter no minimo 4 caracteres e deve conter uma letra e um número");
+            out.println("               <br><br>");
+            out.println("               <a href=\"cadastro.html\">Voltar a pagina de cadastro</a>");
         }
-        else if(request.getParameter("login").equals("")){
-            //erro campo nome vazio
+        else if(request.getParameter("nome").equals("")){
+            out.println("               <br><br>");
+            out.println("                   Campo nome não pode ficar vazio!");
+            out.println("                   <br><br>");
+            out.println("                   <a href=\"cadastro.html\">Voltar a pagina de cadastro</a>");
         }
         else if(request.getParameter("email").equals("")){
-            //erro campo do email vazio
+            out.println("               <br><br>");
+            out.println("               Campo email não pode ficar vazio!");
+            out.println("               <br><br>");
+            out.println("               <a href=\"cadastro.html\">Voltar a pagina de cadastro</a>");
         }
-        else if(request.getParameter("password").equals("")){
-            //erro campo da senha ta vazio
+        else if(request.getParameter("senha").equals("")){
+            out.println("               <br><br>");
+            out.println("               Campo senha não pode ficar vazio!");
+            out.println("               <br><br>");
+            out.println("               <a href=\"cadastro.html\">Voltar a pagina de cadastro</a>");
         }
         else if(ckpEmail == 1){
-            //erro email ja existe
+            out.println("               <br><br>");
+            out.println("               Email já existente, faça outro cadastro!");
+            out.println("               <br><br>");
+            out.println("               <a href=\"cadastro.html\">Voltar a pagina de cadastro</a>");
         }
         else if(ckpUser == 1){
-            //erro nome ja existe
+            out.println("               <br><br>");
+            out.println("               Nome já existente, faça outro cadastro!");
+            out.println("               <br><br>");
+            out.println("               <a href=\"cadastro.html\">Voltar a pagina de cadastro</a>");
         }
         else if(matcher.matches()){
                boolean ok = 
-               db.execute("INSERT INTO users (user_name, user_email, user_password) "
-                    + "VALUES (?,?,?)",request.getParameter("login"), email, 
-                    request.getParameter("password")); //verifica se retorna algo do bd
+               db.execute("INSERT INTO users (user_name, user_address, user_email, user_password) "
+                    + "VALUES (?,?,?,?)",username, address, email, password); //verifica se retorna algo do bd
             if(ok){
-                response.setStatus(200);
+                out.println("               <br><br>");
+                out.println("               Cadastro realizado com sucesso!");
+                out.println("               <br><br>");
+                out.println("               <a href=\"login.html\">Realizar Login</a>");
                 //cadastro realizado com sucesso
             }
             else{
-                response.setStatus(500);
+                out.println("               <br><br>");
+                out.println("               Falha ao fazer conexão com o banco de dados!");
+                out.println("               <br><br>");
+                out.println("               <a href=\"login.html\">Tentar novamente</a>");
                 //retornar erro na conexão com o banco de dados
             } 
         }

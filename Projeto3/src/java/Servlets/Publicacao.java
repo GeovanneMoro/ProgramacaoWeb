@@ -84,6 +84,10 @@ public class Publicacao extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        
+        String titulo = request.getParameter("titulo");
+        String texto = request.getParameter("texto");
+        
         String name = (String) request.getSession().getAttribute("login");
         int var = 0;
         ResultSet rs;
@@ -100,53 +104,11 @@ public class Publicacao extends HttpServlet {
                 response.sendRedirect("Login");
         }
         db.execute("INSERT INTO posts (post_title, post_text, user_id) "
-            + "VALUES (?,?,?)", request.getParameter("title"), request.getParameter("text"), var);
+            + "VALUES (?,?,?)", titulo, texto, var);
         
-        try (PrintWriter out = response.getWriter()) {
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("   <head>");
-            out.println("       <meta charset=\"utf-8\" />");
-            out.println("       <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">");
-            out.println("       <title> - ALPHA - </title>");
-            out.println("       <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">");
-            out.println("       <link rel=\"stylesheet\" type=\"text/css\" media=\"screen\" href=\"style.css\" />");
-            out.println("       <script src=\"main.js\"></script>");
-            out.println("   </head>");
-
-            out.println("   <body>");
-            out.println("       <div class=\"background\">");
-            out.println("          <a href=\"/Projeto2/Cadastro\"> <div <div class=\"right-menu\">Cadastrar</div> </a>");
-            out.println("           <a href=\"/Projeto2/Publicacao\"> <div class=\"right-menu\">Publicar textos</div> </a>");
-            out.println("           <a href=\"/Projeto2/Busca\"> <div class=\"right-menu\">Buscar </div> </a>");
-            out.println("           <a href=\"/Projeto2/Main\"> <div class=\"right-menu\">Home </div> </a>");
-            out.println("           <div class = \"icon\"></div>");
-            out.println("           <div class=\"left-menu\"><b>Alpha</b> by Pixelarity</div>");
-            out.println("       <p class = \"fontesup1\">Textos diversos</p>");
-            if (name != null) {
-                out.println("       <p class = \"fontesup2\">Olá " +name+ "! <a href = \"/Projeto2/Logout\">Sair da sessão </a></p> ");
-            }
-            out.println("           <table class = \"tabela-botao\">");
-            out.println("               <tr>");
-            out.println("                   <td class = \"firstelement\"><a href = \"/Projeto2/Login\"> Logar </a></td>");
-            out.println("                   <td class = \"secondelement\"><a href = \"/Projeto2/Publicacao\"> Criar texto </a></td>");
-            out.println("               </tr>");
-            out.println("           </table>");
-            if (name != null) {
-                out.println("<a href = \"/Projeto2/Logout\"><p = center>Logout</p> </a>");
-            }
-            out.println("       </div>");
-            out.println("       <div class=\"central1\">");
-            out.println("           <div class=\"header\">");
-            out.println("               Texto inserido com sucesso!");
-            out.println("               <br><br>");
-            out.println("               Conteudo do texto: "+request.getParameter("text"));
-            out.println("               <br><br>");
-            out.println("               <a href=\"/Projeto2/Main\">Voltar a pagina inicial</a>");
-            out.println("           </div>");
-            out.println("       </div>");
-            out.println("   </body>");
-            out.println("</html>");
+        try (PrintWriter out = response.getWriter()) {  
+            out.println("<br><br>");
+            out.println("Texto inserido com sucesso!");
         }
     }
 

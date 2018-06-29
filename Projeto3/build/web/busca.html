@@ -29,21 +29,26 @@
             </div>
             <div class="central1">
             <div class="header">
+          
+                <br><br>
+                <h1>Buscar Texto</h1><br><br>
+                Digite o título do texto <br>
+                <input type = "text" id = "title" size = "40" name = title><br>
+                <input type = "button" onClick = "funcaoBusca()" value = "Buscar" />
+                
+                <div id = 'textoDiv'>Texto:</div>
             <script language = "javascript" type = "text/javascript">
 
             function funcaoBusca() {
             var xmlhttp;  // The variable that makes Ajax possible!
-            
+            console.log("Entrou na busca");
             try {        
                // Opera 8.0+, Firefox, Safari
                xmlhttp = new XMLHttpRequest();
             } catch (e) {
-               
-               // Internet Explorer Browsers
                try {
                   xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
                } catch (e) {
-                  
                   try {
                      xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
                   } catch (e) {
@@ -52,17 +57,20 @@
                      return false;
                   }
                }
-            }            
-            xmlhttp.open("GET", "Projeto3/Busca?post_title=sapo", true);
-               // xmlhttp.open("GET", "cidade?nome=" + this.value, true);
-
-            xmlhttp.onreadystatechange = function() {
+            }      
+            var titulo = document.getElementById('title').value;
             
+            console.log(titulo);
+            //xmlhttp.open("GET", "Projeto3/Busca?post_title=sapo", true);
+            //colocar valor certo pra mandar junto com o get
+            document.getElementById('textoDiv').innerHTML = "Carregando..";
+            xmlhttp.open("GET", "/Projeto3/Busca?valor="+titulo, true);
+            xmlhttp.send(); 
+            xmlhttp.onreadystatechange = function() {
                if(xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                     document.getElementById('textoDiv').innerHTML = xmlhttp.responseText;
                }
             }
-            
             // Now get the value from user and pass it to
             // server script.
             /*var titulo = document.getElementById('post_title').value;
@@ -70,16 +78,9 @@
             var queryString = "?post_title = " + title ;
             
             queryString +=  "&post_text = " + texto;*/
-            xmlhttp.send(); 
          }         
-            </script>    
-                <br><br>
-                <h1>Buscar Texto</h1><br><br>
-                Digite o título do texto <br>
-                <input type = "text" size = "40" name = title><br>
-                <input type = "button" onClick = "funcaoBusca()" value = "Buscar" />
+        </script>    
                 
-                <div id = 'textoDiv'>Texto:</div>
             </div>
             </div>
             </body>

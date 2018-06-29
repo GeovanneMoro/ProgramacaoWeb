@@ -28,8 +28,9 @@ public class Busca extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        String name = (String) request.getSession().getAttribute("login");
-        String titulo = request.getParameter("post_title");
+//      String name = (String) request.getSession().getAttribute("login");
+        String titulo = request.getParameter("valor");
+        System.out.println("Print do request: "+titulo);
 
         try (PrintWriter out = response.getWriter()) {
         ResultSet rs = db.query("SELECT * FROM posts WHERE post_title LIKE '%"+ titulo+"%'");
