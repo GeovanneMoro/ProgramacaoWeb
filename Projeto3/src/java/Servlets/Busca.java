@@ -17,12 +17,11 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "Busca", urlPatterns = {"/Busca"})
 public class Busca extends HttpServlet {
 
-    
     private final Database db = new Database(new ConfigurationsMySQL());
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        
+        response.setContentType("text/html;charset=UTF-8");      
     }
 
     @Override
@@ -30,14 +29,21 @@ public class Busca extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
         String name = (String) request.getSession().getAttribute("login");
+        String titulo = request.getParameter("post_title");
 
         try (PrintWriter out = response.getWriter()) {
-        if (name != null) {
-            out.println("       <p class = \"fontesup2\">Olá " +name+ "! <a href = \"/Projeto2/Logout\">Sair da sessão </a></p> ");
-            }
-        out.println("           <table class = \"tabela-botao\">");
-
+        ResultSet rs = db.query("SELECT * FROM posts WHERE post_title LIKE '%"+ titulo+"%'");
+        while(rs.next()){
+            out.println("           "+rs.getString("post_title"));
+            out.println("           <hr>");
+            out.println("           "+rs.getString("post_text"));
+            out.println("           <br><br>");
         }
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(Busca.class.getName()).log(Level.SEVERE, null, ex);
+        }
+ 
     }
 
     /**
@@ -52,20 +58,8 @@ public class Busca extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        if (name != null) {
-            out.println("       <p class = \"fontesup2\">Olá " +name+ "! <a href = \"/Projeto2/Logout\">Sair da sessão </a></p> ");
-        }
-        ResultSet rs = db.query("SELECT * FROM posts WHERE post_title LIKE '%"+ request.getParameter("title")+"%'");
-        while(rs.next()){
-            out.println("           "+rs.getString("post_title"));
-            out.println("           <hr>");
-            out.println("           "+rs.getString("post_text"));
-            out.println("           <br><br>");
-        }            
-    }   
-        catch (SQLException ex) {
-            Logger.getLogger(Busca.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
+        
     }
     /**
      * Returns a short description of the servlet.
